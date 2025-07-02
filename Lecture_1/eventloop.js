@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs');
 console.log("start")
 setTimeout(()=>{
     console.log("timer callback")
