@@ -56,6 +56,11 @@ buyProduct("Iphone 16", function(err, amount){
     })
 })
 
+buyProduct("Iphone")
+.then((data)=>{
+    
+})
+
 const fs = require("fs")
 
 fs.readFile("filepath", "utf-8", (err, data)=>{
