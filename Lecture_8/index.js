@@ -26,7 +26,7 @@ app.get("/watch", (req, res)=>{
 
 
 //Params
-app.get("/watch/:v/video/:n", (req, res)=>{
+app.get("/watch/:v/video/:n", (req, res)=>{      // accessed by colon :
     console.log(req.params.v)
     console.log(req.params.n)
     res.send("got it !!!!")
