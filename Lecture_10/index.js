@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express();
+const fs = require("fs")
 
 app.use(express.static(__dirname+"/public"))
 
@@ -17,9 +18,14 @@ app.post("/users", (req, res)=>{
     //username, password
     let name = req.body.name
     let pass = req.body.pass
-    res.json({
-        name,
-        pass
+
+    const user = {name, pass}
+
+    fs.writeFile("userData.json", JSON.stringify(user), (err)=>{
+        if(err){
+            res.status(400).send("Error Occurred")
+        }
+        res.send("User added")
     })
 })
 
