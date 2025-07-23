@@ -13,7 +13,7 @@ app.get('/', (req, res)=>{                  // req, res are objects
     res.end("hi")   //can only send string  Response header is not set in res.send
 })
 
-//path-variable: variable inside the URL
+//path-variable: variable inside the URLs
 // 2 ways to send query parameter and params
 
 //Query Parameter
