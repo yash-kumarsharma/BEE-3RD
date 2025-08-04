@@ -1,0 +1,5 @@
+fetch and axios: To send http request
+
+fetch: promise based (returns promise), we use .then, .catch
+fetch("URL")
+.then((req)=>{})
