@@ -30,9 +30,17 @@ app.post("/addUser", (req, res) => {
         }
         allUser.push(newUser);
         fs.writeFileSync("./users.json", JSON.stringify(allUser));
-        res.json(newUser);
+        // res.json(newUser);
+        res.json({
+            success: true,
+            data: allUser
+        })
     } catch (error) {
-        return res.status(500).send("Error: " + error.message);
+        // return res.status(500).send("Error: " + error.message);
+        return res.json({
+            success: false,
+            error: "Something went wrong"
+        })
     }
 });
 app.listen(3000, ()=>{

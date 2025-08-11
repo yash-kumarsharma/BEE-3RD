@@ -92,6 +92,11 @@ function addUser(name, username, URL){
         return res.json();
     }).then((data)=>{
         console.log(data);
+        if(data.success){
+            alert("User registered successfully")
+        } else {
+            alert(data.error)
+        }
     })
 }
 
