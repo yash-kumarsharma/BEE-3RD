@@ -8,20 +8,25 @@ const Users = require("./model/user")
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.post("/blogs",async (req, res) => {
-    let { title, body } = req.body
+    let { title, body, userId } = req.body
+    let userExist = await user.findById(userId);
+    if(userExist){
     // console.log(title, body);
     // res.send("Got it")
     let newBlog = new Blogs({
         title: title,
         body: body,
-        date: Date.now()
+        date: Date.now(),
+        userId: userId
     })
     await newBlog.save()
+    userExist.blogs.push(newBlog._id)
     res.json({
         success: true,
         data: newBlog,
         message: "Blog added successfully"
     })
+    }
 })
 
 app.post("/users", async(req, res)=>{
