@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const user = require("./user")
+const User = require("./user")
 const BlogPost = new Schema({
   title: String,
   body: String,
   date: Date,
   userId: {
     type: mongoose.Types.ObjectId,
-    ref: "User"
+    ref: 'User'
   }
 });
 module.exports = mongoose.model('Blog', BlogPost);

@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.post("/blogs",async (req, res) => {
     let { title, body, userId } = req.body
-    let userExist = await user.findById(userId);
+    let userExist = await Users.findById(userId);
     if(userExist){
     // console.log(title, body);
     // res.send("Got it")
@@ -19,8 +19,8 @@ app.post("/blogs",async (req, res) => {
         date: Date.now(),
         userId: userId
     })
-    await newBlog.save()
     userExist.blogs.push(newBlog._id)
+    await newBlog.save()
     res.json({
         success: true,
         data: newBlog,
@@ -72,11 +72,13 @@ app.get("/users", async(req, res)=>{
 
 app.get("/users/:id", async(req, res)=>{
     let {id} = req.params
-    let user = await Users.findOne({_id:id});
+    let user = await Users.findOne({_id:id}).populate("blogs")
+    if(userExist){
     res.json({
         success: true,
         data: user
     })
+}
 })
 
 app.listen(4445, () => {
