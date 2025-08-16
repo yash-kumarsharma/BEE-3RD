@@ -109,7 +109,7 @@ app.delete("/blogs/:blogId", async(req, res)=>{
     await userExist.save();
     res.json({
         success: true,
-        message: "Blog deletede successfully",
+        message: "Blog deleted successfully",
         data: userExist
     })
 })
@@ -121,7 +121,16 @@ app.put("/blogs/:blogId", async(req, res)=>{
     let blogExist = await Blogs.findById(blogId)
     if(!blogId) return res.join({
         success: false,
-         
+        message: "Blog not found"
+    })
+
+    await Blogs.findByIdAndUpdate(blogId, {
+        title: title,
+        body: body
+    })
+    res.json({
+        success: true,
+        message: "Blog Updated Successfully"
     })
 })
 
