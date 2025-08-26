@@ -37,7 +37,7 @@ function isLogin(req, res, next) {
 }
 
 // adding a blog to database
-app.post("/blogs", async (req, res) => {
+app.post("/blogs",isLogin,  async (req, res) => {
     let { title, body, userId } = req.body
     let userExist = await Users.findById(userId);
     if (userExist) {
@@ -94,7 +94,7 @@ app.post("/users/login", async (req, res) => {
             })
         }
         if (userExist.password == password) {
-            let token = jwt.sign({ "user": userExist._id }, "Yash")
+            let token = jwt.sign({ "userId": userExist._id }, "Yash")
             return res.json({
                 success: true,
                 message: "Login successfull",
@@ -152,7 +152,7 @@ app.listen(4445, () => {
 
 // delete blog
 
-app.delete("/blogs/:blogId", async (req, res) => {
+app.delete("/blogs/:blogId", isLogin, async (req, res) => {
     let { blogId } = req.params;
     let { userId } = req.body;
 
@@ -177,7 +177,7 @@ app.delete("/blogs/:blogId", async (req, res) => {
     })
 })
 
-app.put("/blogs/:blogId", async (req, res) => {
+app.put("/blogs/:blogId", isLogin, async (req, res) => {
     let { blogId } = req.params
     let { title, body } = req.body
 
